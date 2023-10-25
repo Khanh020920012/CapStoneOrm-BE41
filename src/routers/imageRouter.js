@@ -7,6 +7,7 @@ const imageRouter = express.Router();
 imageRouter.get("/", imageController.getList);
 imageRouter.get("/search", imageController.search);
 imageRouter.get("/:imageId", imageController.getImageInfo);
+imageRouter.post("/", middleware.protect, middleware.upload().single("file"), imageController.createImage);
 
 imageRouter.get("/comment/:imageId", imageController.getComment);
 imageRouter.post("/comment", middleware.protect, middleware.checkCommentRequest, imageController.createComment);

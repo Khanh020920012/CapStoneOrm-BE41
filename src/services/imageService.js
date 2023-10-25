@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { prisma } from "../../app.js";
 
 export const imageService = {
     getList: async () => {
@@ -134,6 +133,18 @@ export const imageService = {
                 imageId: dataReq.imageId,
                 users_id: dataReq.user.userId,
             },
+        });
+    },
+
+    createImage: async (dataReq) => {
+        const data = {
+            imageName: dataReq.file.filename,
+            imageUrl: dataReq.imageName,
+            users_id: dataReq.user.userId,
+        };
+
+        return await prisma.images.create({
+            data,
         });
     },
 };

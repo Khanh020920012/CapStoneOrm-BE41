@@ -1,3 +1,4 @@
+import fs from "fs";
 import { helper } from "../helpers/helper.js";
 import { imageService } from "../services/imageService.js";
 
@@ -97,6 +98,20 @@ export const imageController = {
             const user = req.user;
 
             const dataRes = await imageService.deleteImage({ imageId: +imageId, user });
+
+            helper.responses(res, 200, dataRes);
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    createImage: async (req, res, next) => {
+        try {
+            const file = req.file;
+            const { imageName } = req.body;
+            const user = req.user
+
+            const dataRes = await imageService.createImage({ file, imageName, user });
 
             helper.responses(res, 200, dataRes);
         } catch (error) {

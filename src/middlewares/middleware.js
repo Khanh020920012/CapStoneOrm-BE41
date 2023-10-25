@@ -1,4 +1,8 @@
+import { prisma } from "../../app.js";
 import { helper } from "../helpers/helper.js";
+import multer, { diskStorage } from "multer";
+import fs from "fs";
+import path from "path";
 
 export const middleware = {
     errorHandle: (err, req, res, next) => {
@@ -13,9 +17,9 @@ export const middleware = {
         });
     },
 
-    protect: (req, res, next) => {
+    protect: async (req, res, next) => {
         const accessToken = req.headers.authorization;
-        
+
         if (!accessToken || !accessToken.startsWith("Bearer ")) return helper.responses(res, 400, "Not enough permissions");
 
         const token = accessToken.split(" ")[1];
@@ -24,7 +28,15 @@ export const middleware = {
         const decodedToken = helper.verifyJwt(token);
         if (!decodedToken) return helper.responses(res, 400, "Not enough permissions");
 
-        req.user = decodedToken;
+        const user = await prisma.users.findFirst({
+            where: {
+                userId: decodedToken.userId,
+            },
+        });
+
+        delete user.password;
+
+        req.user = user;
 
         next();
     },
@@ -52,5 +64,15 @@ export const middleware = {
         if (!req.body.content) return helper.responses(res, 400, "Invalid content");
 
         next();
+    },
+
+    upload: () => {
+        if (!fs.existsSync(path.join(process.cwd(), "public", "img"))) fs.mkdirSync(imgUploadDir, { recursive: true });
+        return multer({
+            storage: diskStorage({
+                destination: process.cwd() + "/public/img",
+                filename: (req, file, callback) => callback(null, new Date().getTime() + "_" + file.originalname),
+            }),
+        });
     },
 };

@@ -1,6 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import { helper } from "../helpers/helper.js";
-const prisma = new PrismaClient();
+import { prisma } from "../../app.js";
 
 export const userService = {
     login: async (dataReq) => {

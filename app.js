@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import compression from "compression";
 import routers from "./src/routers/index.js";
+import { PrismaClient } from "@prisma/client";
 
 const app = express();
 
@@ -29,7 +30,10 @@ app.use(compression());
 
 // express.json(): body => JSON
 app.use(express.json());
+app.use(express.static("."))
 //  ===============MIDLEWARAE =========================
+
+export const prisma = new PrismaClient();
 
 app.use("/api/v1", routers);
 
