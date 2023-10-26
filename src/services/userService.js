@@ -91,7 +91,7 @@ export const userService = {
 
         return result.map((item) => {
             return {
-                users: item.users.userName,
+                users: { userName: item.users.userName },
                 ...item.images,
                 saved: 1,
             };

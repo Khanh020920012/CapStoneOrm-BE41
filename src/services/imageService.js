@@ -34,7 +34,7 @@ export const imageService = {
         });
     },
 
-    getImageInfo: async (imageId) => {
+    getImageInfo: async (dataReq) => {
         const imageExist = await prisma.images.findFirst({
             include: {
                 users: {
@@ -44,13 +44,25 @@ export const imageService = {
                 },
             },
             where: {
-                imageId,
+                imageId: dataReq.imageId,
             },
         });
 
         if (!imageExist) throw Object.assign(new Error("Image Not Found"), { status: 404 });
 
-        return imageExist;
+        const savedExist = await prisma.saved.findFirst({
+            where: {
+                AND: {
+                    images_id: dataReq.imageId,
+                    users_id: dataReq.user.userId,
+                },
+            },
+        });
+
+        return {
+            ...imageExist,
+            saved: savedExist?.isSaved || 0,
+        };
     },
 
     createComment: async (dataReq) => {

@@ -29,7 +29,7 @@ export const imageController = {
         try {
             const { imageId } = req.params;
 
-            const dataRes = await imageService.getImageInfo(+imageId);
+            const dataRes = await imageService.getImageInfo({imageId: +imageId, user: req.user});
 
             helper.responses(res, 200, dataRes);
         } catch (error) {
