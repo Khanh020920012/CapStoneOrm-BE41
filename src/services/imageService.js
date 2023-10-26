@@ -1,4 +1,5 @@
 import { prisma } from "../../app.js";
+import { helper } from "../helpers/helper.js";
 
 export const imageService = {
     getList: async () => {
@@ -137,9 +138,11 @@ export const imageService = {
     },
 
     createImage: async (dataReq) => {
+        const fileName = helper.saveImage(dataReq.file);
+
         const data = {
-            imageName: dataReq.file.filename,
-            imageUrl: dataReq.imageName,
+            imageName: dataReq.imageName,
+            imageUrl: fileName,
             users_id: dataReq.user.userId,
         };
 

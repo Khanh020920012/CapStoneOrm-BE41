@@ -1,5 +1,7 @@
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import fs from "fs";
+import path from "path";
 
 export const helper = {
     responses: (res, code, data, links) => {
@@ -43,5 +45,20 @@ export const helper = {
         const decodedToken = jwt.verify(accessToken, secret);
 
         return decodedToken;
+    },
+
+    saveImage: (file) => {
+        if (!fs.existsSync(path.join(process.cwd(), "public", "img"))) fs.mkdirSync(imgUploadDir, { recursive: true });
+
+        const fileName = new Date().getTime() + "_" + file.originalname;
+
+        const filePath = path.join("public/img", fileName);
+
+        fs.writeFile(filePath, file.buffer, "binary", (err) => {
+            if (err) console.log("ERROR", err);
+            console.log("Save Image Successfully");
+        });
+
+        return fileName
     },
 };

@@ -109,7 +109,7 @@ export const imageController = {
         try {
             const file = req.file;
             const { imageName } = req.body;
-            const user = req.user
+            const user = req.user;
 
             const dataRes = await imageService.createImage({ file, imageName, user });
 

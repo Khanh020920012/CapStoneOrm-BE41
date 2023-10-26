@@ -66,13 +66,33 @@ export const middleware = {
         next();
     },
 
+    checkCreateImageRequest: (req, res, next) => {
+        if (!req.file) return helper.responses(res, 400, "Invalid file");
+        if (req.file.size > 1000000) return helper.responses(res, 400, "File size cannot exceed 1mb");
+        if (!req.body.imageName) return helper.responses(res, 400, "Invalid imageName");
+        next();
+    },
+
     upload: () => {
         if (!fs.existsSync(path.join(process.cwd(), "public", "img"))) fs.mkdirSync(imgUploadDir, { recursive: true });
+
+        const storage = diskStorage({
+            destination: process.cwd() + "/public/img",
+            filename: (req, file, callback) => callback(null, new Date().getTime() + "_" + file.originalname),
+        });
         return multer({
-            storage: diskStorage({
-                destination: process.cwd() + "/public/img",
-                filename: (req, file, callback) => callback(null, new Date().getTime() + "_" + file.originalname),
-            }),
+            storage,
+            fileFilter: (req, file, cb) => {
+                console.log(JSON.stringify(req.body));
+                // Để từ chối tập tin này, hãy nhập `false`, như sau:
+                cb(null, false);
+
+                // Để chấp nhận file pass `true`, như sau:
+                // cb(null, true);
+
+                // Bạn luôn có thể chuyển lỗi nếu có sự cố xảy ra:
+                // cb(new Error("Tôi không biết gì cả!"));
+            },
         });
     },
 };
