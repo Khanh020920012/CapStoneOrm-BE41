@@ -2,6 +2,7 @@ import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import fs from "fs";
 import path from "path";
+import slugify from "slugify";
 
 export const helper = {
     responses: (res, code, data, links) => {
@@ -34,7 +35,7 @@ export const helper = {
 
         if (!secret) return undefined;
 
-        const token = jwt.sign(payload, secret, { expiresIn });
+        const token = jwt.sign(payload, secret, { expiresIn: expiresIn });
 
         return token;
     },
@@ -50,7 +51,7 @@ export const helper = {
     saveImage: (file) => {
         if (!fs.existsSync(path.join(process.cwd(), "public", "img"))) fs.mkdirSync(imgUploadDir, { recursive: true });
 
-        const fileName = new Date().getTime() + "_" + file.originalname;
+        const fileName = new Date().getTime() + "_" + slugify(file.originalname);
 
         const filePath = path.join("public/img", fileName);
 
@@ -59,6 +60,6 @@ export const helper = {
             console.log("Save Image Successfully");
         });
 
-        return fileName
+        return fileName;
     },
 };

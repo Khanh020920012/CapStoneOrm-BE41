@@ -118,4 +118,14 @@ export const imageController = {
             next(error);
         }
     },
+
+    getListSaved: async (req, res, next) => {
+        try {
+            const dataRes = await imageService.getListSaved(req.user);
+
+            helper.responses(res, 200, dataRes);
+        } catch (error) {
+            next(error);
+        }
+    },
 };

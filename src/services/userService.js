@@ -48,17 +48,38 @@ export const userService = {
     },
 
     getImagesCreated: async (user) => {
-        return await prisma.images.findMany({
+        const list = await prisma.images.findMany({
+            include: {
+                users: true,
+            },
             where: {
                 users_id: user.userId,
             },
         });
+
+        const listSaved = await prisma.saved.findMany({
+            where: {
+                users_id: user.userId,
+                isSaved: 1,
+            },
+        });
+
+        return list.map((image) => {
+            const isSave = listSaved.findIndex((item) => {
+                if (image.imageId === item.images_id) return true;
+            });
+            return {
+                ...image,
+                saved: isSave !== -1 ? 1 : 0,
+            };
+        });
     },
 
     getImagesSaved: async (user) => {
-        return await prisma.saved.findMany({
+        const result = await prisma.saved.findMany({
             include: {
                 images: true,
+                users: true,
             },
             where: {
                 AND: {
@@ -66,6 +87,14 @@ export const userService = {
                     isSaved: 1,
                 },
             },
+        });
+
+        return result.map((item) => {
+            return {
+                users: item.users.userName,
+                ...item.images,
+                saved: 1,
+            };
         });
     },
 };

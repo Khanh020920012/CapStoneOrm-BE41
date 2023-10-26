@@ -22,8 +22,8 @@ const corsOptions = {
     },
 };
 
-app.use(cors(corsOptions));
-// app.use(cors());
+// app.use(cors(corsOptions));
+app.use(cors());
 
 //  ===============MIDLEWARAE =========================
 // nén (compress) các tài nguyên HTTP trước khi gửi từ máy chủ (server) tới trình duyệt (browser)

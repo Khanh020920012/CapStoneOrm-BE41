@@ -18,27 +18,33 @@ export const middleware = {
     },
 
     protect: async (req, res, next) => {
-        const accessToken = req.headers.authorization;
+        try {
+            const accessToken = req.headers.authorization;
 
-        if (!accessToken || !accessToken.startsWith("Bearer ")) return helper.responses(res, 400, "Not enough permissions");
+            if (!accessToken || !accessToken.startsWith("Bearer ")) return helper.responses(res, 400, "Not enough permissions");
 
-        const token = accessToken.split(" ")[1];
-        if (!token || token === "null") return helper.responses(res, 400, "Not enough permissions");
+            const token = accessToken.split(" ")[1];
+            if (!token || token === "null") return helper.responses(res, 400, "Not enough permissions");
 
-        const decodedToken = helper.verifyJwt(token);
-        if (!decodedToken) return helper.responses(res, 400, "Not enough permissions");
+            const decodedToken = helper.verifyJwt(token);
+            if (!decodedToken) return helper.responses(res, 400, "Not enough permissions");
 
-        const user = await prisma.users.findFirst({
-            where: {
-                userId: decodedToken.userId,
-            },
-        });
+            const user = await prisma.users.findFirst({
+                where: {
+                    userId: decodedToken.userId,
+                },
+            });
 
-        delete user.password;
+            delete user.password;
 
-        req.user = user;
+            req.user = user;
 
-        next();
+            next();
+        } catch (error) {
+            if (error.message === "jwt expired") {
+                return helper.responses(res, 400, "jwt expired");
+            }
+        }
     },
 
     checkLoginRequest: (req, res, next) => {
@@ -80,19 +86,7 @@ export const middleware = {
             destination: process.cwd() + "/public/img",
             filename: (req, file, callback) => callback(null, new Date().getTime() + "_" + file.originalname),
         });
-        return multer({
-            storage,
-            fileFilter: (req, file, cb) => {
-                console.log(JSON.stringify(req.body));
-                // Để từ chối tập tin này, hãy nhập `false`, như sau:
-                cb(null, false);
-
-                // Để chấp nhận file pass `true`, như sau:
-                // cb(null, true);
-
-                // Bạn luôn có thể chuyển lỗi nếu có sự cố xảy ra:
-                // cb(new Error("Tôi không biết gì cả!"));
-            },
-        });
+        
+        return multer({ storage });
     },
 };

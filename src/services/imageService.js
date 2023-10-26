@@ -3,7 +3,7 @@ import { helper } from "../helpers/helper.js";
 
 export const imageService = {
     getList: async () => {
-        return await prisma.images.findMany({
+        const listImage = await prisma.images.findMany({
             include: {
                 users: {
                     select: {
@@ -11,6 +11,9 @@ export const imageService = {
                     },
                 },
             },
+        });
+        return listImage.map((item) => {
+            return { ...item, saved: 0 };
         });
     },
 
@@ -148,6 +151,33 @@ export const imageService = {
 
         return await prisma.images.create({
             data,
+        });
+    },
+
+    getListSaved: async (user) => {
+        const list = await prisma.images.findMany({
+            include: {
+                users: {
+                    select: {
+                        userName: true,
+                    },
+                },
+            },
+        });
+        const listSaved = await prisma.saved.findMany({
+            where: {
+                users_id: user.userId,
+                isSaved: 1,
+            },
+        });
+        return list.map((image) => {
+            const isSave = listSaved.findIndex((item) => {
+                if (image.imageId === item.images_id) return true;
+            });
+            return {
+                ...image,
+                saved: isSave !== -1 ? 1 : 0,
+            };
         });
     },
 };
