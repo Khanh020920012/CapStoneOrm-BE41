@@ -86,7 +86,23 @@ export const middleware = {
             destination: process.cwd() + "/public/img",
             filename: (req, file, callback) => callback(null, new Date().getTime() + "_" + file.originalname),
         });
-        
+
         return multer({ storage });
+    },
+
+    isLogin: (req, res, next) => {
+        const accessToken = req.headers.authorization.split(" ")[1];
+
+        if (accessToken === "null") req.isLogin = false;
+
+        if (accessToken !== "null") {
+
+            req.user = helper.decodeJwt(accessToken);
+
+            console.log(req.user);
+            
+            req.isLogin = true;
+        }
+        next();
     },
 };

@@ -5,7 +5,11 @@ import { imageService } from "../services/imageService.js";
 export const imageController = {
     getList: async (req, res, next) => {
         try {
-            const dataRes = await imageService.getList();
+            const dataReq = {
+                isLogin: req.isLogin,
+                user: req.user,
+            };
+            const dataRes = await imageService.getList(dataReq);
 
             helper.responses(res, 200, dataRes);
         } catch (error) {
@@ -17,7 +21,15 @@ export const imageController = {
         try {
             const { searchText } = req.query;
 
-            const dataRes = await imageService.search(searchText);
+            const isLogin = req.isLogin;
+
+            const dataReq = {
+                searchText,
+                isLogin,
+                user: req.user,
+            };
+
+            const dataRes = await imageService.search(dataReq);
 
             helper.responses(res, 200, dataRes);
         } catch (error) {
@@ -25,11 +37,49 @@ export const imageController = {
         }
     },
 
+    searchOfSavedPage: async (req, res, next) => {
+        try {
+            const { searchText } = req.query;
+
+            const dataReq = {
+                searchText,
+                user: req.user,
+            };
+
+            const dataRes = await imageService.searchOfSavedPage(dataReq);
+
+            helper.responses(res, 200, dataRes);
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    searchOfCreatedPage: async (req, res, next) => {
+        try {
+            const { searchText } = req.query;
+
+            const dataReq = {
+                searchText,
+                user: req.user,
+            };
+
+            const dataRes = await imageService.searchOfCreatedPage(dataReq);
+
+            helper.responses(res, 200, dataRes);
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    getListCreated: async (req, res, next) => {},
+
     getImageInfo: async (req, res, next) => {
         try {
             const { imageId } = req.params;
 
-            const dataRes = await imageService.getImageInfo({imageId: +imageId, user: req.user});
+            const isLogin = req.isLogin;
+
+            const dataRes = await imageService.getImageInfo({ imageId: +imageId, user: req.user, isLogin });
 
             helper.responses(res, 200, dataRes);
         } catch (error) {
@@ -112,16 +162,6 @@ export const imageController = {
             const user = req.user;
 
             const dataRes = await imageService.createImage({ file, imageName, user });
-
-            helper.responses(res, 200, dataRes);
-        } catch (error) {
-            next(error);
-        }
-    },
-
-    getListSaved: async (req, res, next) => {
-        try {
-            const dataRes = await imageService.getListSaved(req.user);
 
             helper.responses(res, 200, dataRes);
         } catch (error) {

@@ -76,23 +76,27 @@ export const userService = {
     },
 
     getImagesSaved: async (user) => {
-        const result = await prisma.saved.findMany({
+        const result = await prisma.images.findMany({
             include: {
-                images: true,
-                users: true,
+                users: {
+                    select: {
+                        userName: true,
+                    },
+                },
             },
             where: {
-                AND: {
-                    users_id: user.userId,
-                    isSaved: 1,
+                saved: {
+                    some: {
+                        isSaved: 1, // Điều kiện isSaved là 1 trong bảng saved
+                        users_id: user.userId,
+                    },
                 },
             },
         });
 
         return result.map((item) => {
             return {
-                users: { userName: item.users.userName },
-                ...item.images,
+                ...item,
                 saved: 1,
             };
         });

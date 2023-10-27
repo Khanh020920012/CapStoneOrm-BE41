@@ -48,6 +48,10 @@ export const helper = {
         return decodedToken;
     },
 
+    decodeJwt: (accessToken) => {
+        return jwt.decode(accessToken);
+    },
+
     saveImage: (file) => {
         if (!fs.existsSync(path.join(process.cwd(), "public", "img"))) fs.mkdirSync(imgUploadDir, { recursive: true });
 
