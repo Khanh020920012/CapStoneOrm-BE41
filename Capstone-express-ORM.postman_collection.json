@@ -1,0 +1,582 @@
+{
+	"info": {
+		"_postman_id": "3f0aec6d-ad9e-46a7-9bf8-dab75d1320dc",
+		"name": "Capstone-express-ORM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16940726"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"khachhang\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6969/api/v1/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"vulebaolong\",\r\n    \"password\": \"1234\",\r\n    \"email\": \"vulebaolong@gmail.com\",\r\n    \"phoneNumber\": \"0836789578\",\r\n    \"fullName\": \"Vũ Lê Bảo Long\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6969/api/v1/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "images",
+			"item": [
+				{
+					"name": "Get List Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidnVsZWJhb2xvbmciLCJmdWxsTmFtZSI6IlbFqSBMw6ogQuG6o28gTG9uZyIsImVtYWlsIjoidnVsZWJhb2xvbmdAZ21haWwuY29tIiwicGhvbmVOdW1iZXIiOiIwODM2Nzg5NTc4IiwiaWF0IjoxNjk4Mzg0OTYyLCJleHAiOjE2OTg0MDI5NjJ9.wCcdp22gzVKzupwiN_X5zd5fsCyEegtAx9Equkokglo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6969/api/v1/image/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"image",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Comment Of Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6969/api/v1/image/comment/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"image",
+								"comment",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6969/api/v1/image/search?searchText=t",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"image",
+								"search"
+							],
+							"query": [
+								{
+									"key": "searchText",
+									"value": "t"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search In Page Saved",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoia2hhY2hoYW5nIiwiZnVsbE5hbWUiOiJLaMOhY2ggaMOgbmciLCJlbWFpbCI6ImtoYWNoaGFuZ0BnbWFpbC5jb20iLCJwaG9uZU51bWJlciI6IjEyMzQ1Njc4OTEiLCJpYXQiOjE2OTk2ODc2OTMsImV4cCI6MTY5OTcwNTY5M30.nOdqS5ZHspfzBy4suhsgQnis6JyLjEq5ztKWVhrfnCQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6969/api/v1/image/search-saved?searchText=girl",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"image",
+								"search-saved"
+							],
+							"query": [
+								{
+									"key": "searchText",
+									"value": "girl"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search In Page Created",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidnVsZWJhb2xvbmciLCJmdWxsTmFtZSI6IlbFqSBMw6ogQuG6o28gTG9uZyIsImVtYWlsIjoidnVsZWJhb2xvbmdAZ21haWwuY29tIiwicGhvbmVOdW1iZXIiOiIwODM2Nzg5NTc4IiwiaWF0IjoxNjk4Mzg3MzcwLCJleHAiOjE2OTg0MDUzNzB9.AndmOqEMmrZePoRRUQ4FUhg_EpTChcjCoSwt0L3OqoA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6969/api/v1/image/search-created?searchText=girl",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"image",
+								"search-created"
+							],
+							"query": [
+								{
+									"key": "searchText",
+									"value": "girl"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoia2hhY2hoYW5nIiwiZnVsbE5hbWUiOiJLaMOhY2ggaMOgbmciLCJlbWFpbCI6ImtoYWNoaGFuZ0BnbWFpbC5jb20iLCJwaG9uZU51bWJlciI6IjEyMzQ1Njc4OTEiLCJpYXQiOjE2OTgzMzE3MTIsImV4cCI6MTY5ODM0OTcxMn0.E69rBR1hYbilr4Y9sWDtKODkryfB_OXi-yeNIH6WFNY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6969/api/v1/image/image-info/27",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"image",
+								"image-info",
+								"27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidnVsZWJhb2xvbmciLCJmdWxsTmFtZSI6IlbFqSBMw6ogQuG6o28gTG9uZyIsImVtYWlsIjoidnVsZWJhb2xvbmdAZ21haWwuY29tIiwicGhvbmVOdW1iZXIiOiIwODM2Nzg5NTc4IiwiaWF0IjoxNjk4MzM1ODMzLCJleHAiOjE2OTgzNTM4MzN9.WMSRgQKmA8hD3nC4X-VwYq3vaslEViT2rf2o2cVaNcg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imageId\": 11,\r\n    \"content\": \"hình này đẹp quá nè\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6969/api/v1/image/comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"image",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save and UnSave",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInVzZXJOYW1lIjoia2hhY2hoYW5nIiwiZnVsbE5hbWUiOiJLaMOhY2ggSGFuZyIsImVtYWlsIjoia2hhY2hoYW5nQGdtYWlsLmNvbSIsInBob25lTnVtYmVyIjoiMTIzNDU2Nzg5MSIsImlhdCI6MTY5ODMyMDEzNywiZXhwIjoxNjk4MzM4MTM3fQ.uqpmD1NFChD0tJBV3bScNoQ_6_KMCY8fqlhSs8TdMw0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6969/api/v1/image/save-and-unsave/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"image",
+								"save-and-unsave",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Saved Of A Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoia2hhY2hoYW5nIiwiZnVsbE5hbWUiOiJLaMOhY2ggaMOgbmciLCJlbWFpbCI6ImtoYWNoaGFuZ0BnbWFpbC5jb20iLCJwaG9uZU51bWJlciI6IjEyMzQ1Njc4OTEiLCJpYXQiOjE2OTgzMzE3MTIsImV4cCI6MTY5ODM0OTcxMn0.E69rBR1hYbilr4Y9sWDtKODkryfB_OXi-yeNIH6WFNY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6969/api/v1/image/save/28",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"image",
+								"save",
+								"28"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidnVsZWJhb2xvZyIsImZ1bGxOYW1lIjoiVsWpIEzDqiBC4bqjbyBMb25nIiwiZW1haWwiOiJ2dWxlYmFvbG9uZ0BnbWFpbC5jb20iLCJwaG9uZU51bWJlciI6IjA4MzY3ODk1NzgiLCJpYXQiOjE2OTgyMjY5MzQsImV4cCI6MTY5ODI0NDkzNH0._2RCbyA_TAGxouXUhjaB12ESfuuPwlFS-FTRDmywAuY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6969/api/v1/image/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"image",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidnVsZWJhb2xvbmciLCJmdWxsTmFtZSI6IlbFqSBMw6ogQuG6o28gTG9uZyIsImVtYWlsIjoidnVsZWJhb2xvbmdAZ21haWwuY29tIiwicGhvbmVOdW1iZXIiOiIwODM2Nzg5NTc4IiwiaWF0IjoxNjk4MjgzNDY0LCJleHAiOjE2OTgzMDE0NjR9.dAe6o0bUM7CcRRJ4TeVNWZ4SUkWU81FAjV2lxYPTew4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/vuleb/Pictures/Screenshots/Skyscraper_(2018)_film_poster.png"
+								},
+								{
+									"key": "imageName",
+									"value": "hình mới",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:6969/api/v1/image/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"image",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get User Info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidnVsZWJhb2xvZyIsImZ1bGxOYW1lIjoiVsWpIEzDqiBC4bqjbyBMb25nIiwiZW1haWwiOiJ2dWxlYmFvbG9uZ0BnbWFpbC5jb20iLCJwaG9uZU51bWJlciI6IjA4MzY3ODk1NzgiLCJpYXQiOjE2OTgyMjUwNjEsImV4cCI6MTY5ODI0MzA2MX0.5pB5vzRddAVKqaEtfMie7enctJtvedwCSsnZCJtV1_8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6969/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get images created of user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidnVsZWJhb2xvbmciLCJmdWxsTmFtZSI6IlbFqSBMw6ogQuG6o28gTG9uZyIsImVtYWlsIjoidnVsZWJhb2xvbmdAZ21haWwuY29tIiwicGhvbmVOdW1iZXIiOiIwODM2Nzg5NTc4IiwiaWF0IjoxNjk4Mzg3MzcwLCJleHAiOjE2OTg0MDUzNzB9.AndmOqEMmrZePoRRUQ4FUhg_EpTChcjCoSwt0L3OqoA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6969/api/v1/user/images-created",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"images-created"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get images saved of user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidnVsZWJhb2xvbmciLCJmdWxsTmFtZSI6IlbFqSBMw6ogQuG6o28gTG9uZyIsImVtYWlsIjoidnVsZWJhb2xvbmdAZ21haWwuY29tIiwicGhvbmVOdW1iZXIiOiIwODM2Nzg5NTc4IiwiaWF0IjoxNjk4Mzg3MzcwLCJleHAiOjE2OTg0MDUzNzB9.AndmOqEMmrZePoRRUQ4FUhg_EpTChcjCoSwt0L3OqoA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6969/api/v1/user/images-saved",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"images-saved"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "heath check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6969/api/v1/welcome",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6969",
+					"path": [
+						"api",
+						"v1",
+						"welcome"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

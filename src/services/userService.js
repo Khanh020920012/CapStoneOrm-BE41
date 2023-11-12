@@ -19,6 +19,11 @@ export const userService = {
     },
 
     register: async (dataReq) => {
+        const { userName, password } = dataReq;
+
+        const userExist = await prisma.users.findFirst({ where: { userName } });
+        if (userExist) throw Object.assign(new Error("user already exists"), { status: 400 });
+        
         dataReq.password = await helper.hashedPassword(dataReq.password);
 
         const dataRes = await prisma.users.create({ data: dataReq });
