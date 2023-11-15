@@ -91,12 +91,15 @@ export const middleware = {
     },
 
     isLogin: (req, res, next) => {
-        const accessToken = req.headers.authorization.split(" ")[1];
+        const accessToken = req.headers.authorization;
 
-        if (accessToken === "null") req.isLogin = false;
+        if (!accessToken || !accessToken.startsWith("Bearer ")) req.isLogin = false;
 
-        if (accessToken !== "null") {
-            req.user = helper.decodeJwt(accessToken);
+        const token = accessToken?.split(" ")[1];
+        if (token === "null") req.isLogin = false;
+
+        if (token) {
+            req.user = helper.decodeJwt(token);
 
             req.isLogin = true;
         }
