@@ -12,7 +12,6 @@ const allowedOrigins = ["https://l9-learning-vulebaolong.netlify.app", "https://
 
 const corsOptions = {
     origin: function (origin, callback) {
-        // console.log("origin: ", origin);
         // Kiểm tra xem origin có trong danh sách allowedOrigins hay không
         if (origin === undefined || allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true); // Cho phép truy cập
