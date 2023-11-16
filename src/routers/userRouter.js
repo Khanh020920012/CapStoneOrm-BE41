@@ -11,4 +11,6 @@ userRouter.get("/", middleware.protect, userController.getUserInfo);
 userRouter.get("/images-created", middleware.protect, userController.getImagesCreated);
 userRouter.get("/images-saved", middleware.protect, userController.getImagesSaved);
 
+userRouter.put("/update", middleware.protect, userController.updateUser);
+
 export default userRouter;

@@ -29,3 +29,5 @@
     -   http://localhost:6969/api/v1/user/images-saved
 -   DELETE xoá ảnh đã tạo theo id
     -   http://localhost:6969/api/v1/image/delete/1
+-   PUT chỉnh sửa thông tin cá nhân của user
+    -   http://localhost:6969/api/v1/user/update

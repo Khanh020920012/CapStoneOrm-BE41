@@ -5,7 +5,7 @@ export const userService = {
     login: async (dataReq) => {
         const { userName, password } = dataReq;
 
-        const dataRes = await prisma.users.findFirst({ where: { userName } });
+        const dataRes = await prisma.users.findFirst({ where: { userName: userName } });
         if (!dataRes) throw Object.assign(new Error("user does not exist"), { status: 400 });
 
         const isPassword = await helper.checkPassword(password, dataRes.password);
@@ -23,7 +23,7 @@ export const userService = {
 
         const userExist = await prisma.users.findFirst({ where: { userName } });
         if (userExist) throw Object.assign(new Error("user already exists"), { status: 400 });
-        
+
         dataReq.password = await helper.hashedPassword(dataReq.password);
 
         const dataRes = await prisma.users.create({ data: dataReq });
@@ -105,5 +105,18 @@ export const userService = {
                 saved: 1,
             };
         });
+    },
+
+    updateUser: async (userCurrent, userInput) => {
+        const dataRes = await prisma.users.update({
+            where: { userId: userCurrent.userId },
+            data: userInput,
+        });
+
+        delete dataRes.password;
+
+        const token = helper.createJwt(dataRes, "5h");
+
+        return token;
     },
 };

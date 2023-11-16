@@ -71,8 +71,6 @@ export const imageController = {
         }
     },
 
-    getListCreated: async (req, res, next) => {},
-
     getImageInfo: async (req, res, next) => {
         try {
             const { imageId } = req.params;

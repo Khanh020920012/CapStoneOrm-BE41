@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "3f0aec6d-ad9e-46a7-9bf8-dab75d1320dc",
-		"name": "Capstone-express-ORM",
+		"_postman_id": "f8158ca7-f3db-42ac-9ae1-2d342c6e8998",
+		"name": "capstone-express-orm",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "16940726"
 	},
@@ -243,7 +243,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoia2hhY2hoYW5nIiwiZnVsbE5hbWUiOiJLaMOhY2ggaMOgbmciLCJlbWFpbCI6ImtoYWNoaGFuZ0BnbWFpbC5jb20iLCJwaG9uZU51bWJlciI6IjEyMzQ1Njc4OTEiLCJpYXQiOjE2OTgzMzE3MTIsImV4cCI6MTY5ODM0OTcxMn0.E69rBR1hYbilr4Y9sWDtKODkryfB_OXi-yeNIH6WFNY",
+									"value": "",
 									"type": "string"
 								}
 							]
@@ -251,7 +251,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:6969/api/v1/image/image-info/27",
+							"raw": "http://localhost:6969/api/v1/image/image-info/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -262,7 +262,7 @@
 								"v1",
 								"image",
 								"image-info",
-								"27"
+								"1"
 							]
 						}
 					},
@@ -550,6 +550,47 @@
 								"v1",
 								"user",
 								"images-saved"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInVzZXJOYW1lIjoia2hhY2hoYW5nIiwiZnVsbE5hbWUiOiJLaMOhY2ggSGFuZyIsImVtYWlsIjoia2hhY2hoYW5nQGdtYWlsLmNvbSIsInBob25lTnVtYmVyIjoiMTIzNDU2Nzg5MSIsImlhdCI6MTcwMDEwNjMzNCwiZXhwIjoxNzAwMTI0MzM0fQ.w-qNRwez2_te19l_4igFCXTxLyUlZaU68qHXmySB6Dk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"khanhhang\",\r\n    \"email\": \"vulebaolong123@gmail.com\",\r\n    \"phoneNumber\": \"0836789578123\",\r\n    \"fullName\": \"Vũ Lê Bảo Long123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6969/api/v1/user/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"update"
 							]
 						}
 					},

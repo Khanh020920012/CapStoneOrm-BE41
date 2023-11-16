@@ -67,4 +67,14 @@ export const userController = {
             next(error);
         }
     },
+
+    updateUser: async (req, res, next) => {
+        try {
+            const dataRes = await userService.updateUser(req.user, req.body);
+
+            helper.responses(res, 200, dataRes);
+        } catch (error) {
+            next(error);
+        }
+    },
 };
