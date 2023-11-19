@@ -1,9 +1,11 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import cors from "cors";
 import compression from "compression";
-import routers from "./src/routers/index.js";
+import routers from "./routers/index.js";
 import { PrismaClient } from "@prisma/client";
-import formData from "express-form-data";
+
 
 const app = express();
 
@@ -38,4 +40,9 @@ export const prisma = new PrismaClient();
 
 app.use("/api/v1", routers);
 
-export default app;
+const port = 6969;
+const server = app.listen(port, async () => {
+    console.log(`Listening port http://localhost:${port} ...`);
+});
+
+

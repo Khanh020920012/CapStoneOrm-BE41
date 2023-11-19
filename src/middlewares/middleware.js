@@ -1,4 +1,4 @@
-import { prisma } from "../../app.js";
+import { prisma } from "../index.js"; 
 import { helper } from "../helpers/helper.js";
 import multer, { diskStorage } from "multer";
 import fs from "fs";

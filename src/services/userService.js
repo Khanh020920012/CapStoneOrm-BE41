@@ -1,5 +1,5 @@
 import { helper } from "../helpers/helper.js";
-import { prisma } from "../../app.js";
+import { prisma } from "../index.js";
 
 export const userService = {
     login: async (dataReq) => {
