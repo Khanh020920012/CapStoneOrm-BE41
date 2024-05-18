@@ -1,4 +1,4 @@
-# Nguyễn Tấn Phong
+# Trương Quốc Khánh
 
 -   POST trang đăng ký
     -   http://localhost:6969/api/v1/user/register
@@ -15,7 +15,7 @@
 -   GET thông tin bình luận theo id ảnh
     -   http://localhost:6969/api/v1/image/comment/10
 
-# Trương Quốc Khánh
+# Nguyễn Tấn Phong
 
 -   GET thông tin đã lưu hình này chưa theo id ảnh
     -   http://localhost:6969/api/v1/image/image-info/1 (need to provide tokens)
