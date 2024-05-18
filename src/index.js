@@ -6,21 +6,23 @@ import compression from "compression";
 import routers from "./routers/index.js";
 import { PrismaClient } from "@prisma/client";
 
-
 const app = express();
 
 // Danh sách các đường dẫn được cho phép truy cập
-const allowedOrigins = ["https://l9-learning-vulebaolong.netlify.app", "https://l9-learning-nguyenthihuynhnhi.netlify.app"];
+const allowedOrigins = [
+  "https://l9-learning-vulebaolong.netlify.app",
+  "https://l9-learning-nguyenthihuynhnhi.netlify.app",
+];
 
 const corsOptions = {
-    origin: function (origin, callback) {
-        // Kiểm tra xem origin có trong danh sách allowedOrigins hay không
-        if (origin === undefined || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true); // Cho phép truy cập
-        } else {
-            callback(new Error("Không cho phép truy cập từ nguồn này")); // Từ chối truy cập
-        }
-    },
+  origin: function (origin, callback) {
+    // Kiểm tra xem origin có trong danh sách allowedOrigins hay không
+    if (origin === undefined || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true); // Cho phép truy cập
+    } else {
+      callback(new Error("Không cho phép truy cập từ nguồn này")); // Từ chối truy cập
+    }
+  },
 };
 
 // app.use(cors(corsOptions));
@@ -42,7 +44,5 @@ app.use("/api/v1", routers);
 
 const port = 6969;
 const server = app.listen(port, async () => {
-    console.log(`Listening port http://localhost:${port} ...`);
+  console.log(`Listening port http://localhost:${port} ...`);
 });
-
-

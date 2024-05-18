@@ -1,4 +1,4 @@
-# Vũ Lê Bảo Long
+# Nguyễn Tấn Phong
 
 -   POST trang đăng ký
     -   http://localhost:6969/api/v1/user/register
@@ -15,7 +15,7 @@
 -   GET thông tin bình luận theo id ảnh
     -   http://localhost:6969/api/v1/image/comment/10
 
-# Nguyễn Thị Huỳnh Nhi
+# Trương Quốc Khánh
 
 -   GET thông tin đã lưu hình này chưa theo id ảnh
     -   http://localhost:6969/api/v1/image/image-info/1 (need to provide tokens)
